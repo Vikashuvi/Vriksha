@@ -93,7 +93,7 @@ const Milestones = () => {
         {images.map((image, index) => (
           <ImageContainer key={index} top={image.top}>
             <Figure>
-              {index === 0 && <MilestoneText>Milestone</MilestoneText>}
+              {index === 0 && <MilestoneText>-Milestone-</MilestoneText>}
               {image.src && (
                 <Image 
                   src={image.src} 
