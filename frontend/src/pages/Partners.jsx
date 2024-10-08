@@ -2,11 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const partners = [
-  { name: 'Genoa', logo: '/path/to/genoa-logo.png' },
-  { name: 'Stockholm', logo: '/path/to/stockholm-logo.png' },
-  { name: 'Prague', logo: '/path/to/prague-logo.png' },
-  { name: 'Athen', logo: '/path/to/athen-logo.png' },
-  { name: 'Ottawa', logo: '/path/to/ottawa-logo.png' },
+  { name: 'Genoa' },
+  { name: 'Stockholm' },
+  { name: 'Prague' },
+  { name: 'Athen' },
+  { name: 'Ottawa' },
   // Add more partners as needed
 ];
 
@@ -14,26 +14,29 @@ const Partners = () => {
   return (
     <section className="bg-black text-white py-16">
       <div className="container mx-auto">
-        <h2 className="text-center text-3xl mb-8">Trusted by leading clients</h2>
-        <motion.div
-          className="flex overflow-hidden"
-          initial={{ x: 0 }}
-          animate={{ x: '-100%' }}
-          transition={{
-            x: {
-              repeat: Infinity,
-              repeatType: 'loop',
-              duration: 20,
-              ease: 'linear',
-            },
-          }}
-        >
-          {[...partners, ...partners].map((partner, index) => (
-            <div key={index} className="flex-shrink-0 mx-8">
-              <img src={partner.logo} alt={partner.name} className="h-12" />
-            </div>
-          ))}
-        </motion.div>
+        <h2 className="text-center text-3xl font-bold mb-8">Partners</h2>
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex whitespace-nowrap"
+            animate={{
+              x: [0, -50 * partners.length],
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 10,
+                ease: "linear",
+              },
+            }}
+          >
+            {[...partners, ...partners].map((partner, index) => (
+              <div key={index} className="inline-block mx-8">
+                <span className="text-xl font-bold">{partner.name}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
