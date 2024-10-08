@@ -14,7 +14,8 @@ const Partners = () => {
   return (
     <section className="bg-black text-white py-16">
       <div className="container mx-auto">
-        <h2 className="text-center text-3xl font-bold mb-8">Partners</h2>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white text-center">Partners</h2>
+
         <div className="overflow-hidden">
           <motion.div
             className="flex whitespace-nowrap"
