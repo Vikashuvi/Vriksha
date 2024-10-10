@@ -50,16 +50,23 @@ const Figure = styled.figure`
 
 const MilestoneText = styled.h2`
   position: absolute;
-  font-size: 15vw;
-  font-weight: bold;
+  font-size: 14vw;
+  font-weight: 900;
   color: white;
   text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+  white-space: nowrap;
+  transform: scaleY(1.2);
   z-index: 1;
+  left: 0;
+  right: 0;
+  text-align: center;
+  overflow: hidden;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 10vw;
     position: static;
-   
   }
 `;
 
@@ -93,7 +100,7 @@ const Milestones = () => {
         {images.map((image, index) => (
           <ImageContainer key={index} top={image.top}>
             <Figure>
-              {index === 0 && <MilestoneText>-Milestone-</MilestoneText>}
+              {index === 0 && <MilestoneText>e-Milestone-M</MilestoneText>}
               {image.src && (
                 <Image 
                   src={image.src} 

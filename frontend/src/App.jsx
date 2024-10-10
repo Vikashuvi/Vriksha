@@ -13,13 +13,12 @@ import Advantages from './pages/Advantages'
 function App() {
   return (
     <div className="min-h-screen bg-black p-4">
-      <Hero />
       <Vision />
       <Milestones />
+      
       <Categories />
       <Events />
       <Partners />
-      <Advantages />
     </div>
   )
 }
