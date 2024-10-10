@@ -1,37 +1,7 @@
 import React, { useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
-
-export const content_testimonal = [
-  {
-    image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e8840553eff51ab7404b73_testimonial-img-03.webp",
-    name: "Sophia Chen",
-    testimonial: `"Thanks to their AI-driven insights, we’ve been able to make smarter decisions faster. Their dedication to our success was evident from day one."`,
-    position: "Head of Operations, Innovatex",
-  },
-  {
-    image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e88407dc8dd84e8b5f5848_testimonial-img-04.webp",
-    name: "Emma Blake",
-    testimonial: `"Working with this AI team has been a game-changer for our business. Their innovative solutions streamlined our operations and improved efficiency beyond expectations."`,
-    position: "CTO, Fintechpro",
-  },
-  {
-    image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e88405b213c2b042b9a7f3_testimonial-img-01.webp",
-    name: "Carlos Ramirez",
-    testimonial: `"Their AI solutions transformed our customer experience, allowing us to provide personalized services at scale. I highly recommend their team for any AI project."`,
-    position: "Product Manager, Healthify",
-  },
-  {
-    image:
-      "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e8840579d3cd5c95a0eaec_testimonial-img-02.webp",
-    name: "David Morgan",
-    testimonial: `"The AI services provided were not only cutting-edge but also customized to fit our exact needs. Their expertise truly elevated our digital strategy."`,
-    position: "CEO, Beyond",
-  },
-];
+import { content_testimonal } from "./Testimonials";
 
 const Separtate_testimonal_Component = ({
   text_control = {},
@@ -46,7 +16,7 @@ const Separtate_testimonal_Component = ({
     <motion.div
       initial={whole_initial}
       animate={whole_control}
-      className=" absolute xl:w-[30vw] lg:w-[35vw] md:w-[35vw] sm:w-[35vw] w-[80vw] h-[85vh] top-[50%]   flex flex-col "
+      className=" absolute xl:w-[30vw] lg:w-[35vw] md:w-[35vw] sm:w-[35vw] w-[80vw] h-[75vh] top-[50%]   flex flex-col "
     >
       <motion.div
         initial={image_initial}
@@ -60,13 +30,13 @@ const Separtate_testimonal_Component = ({
         initial={text_initial}
         className=" w-full h-[30%] flex flex-col justify-evenly"
       >
-        <h1 className=" xl:text-[32px] lg:text-[30px] md:text-[26px] sm:text-[24px] font-poppins text-[white]">
+        <h1 className=" xl:text-[32px] lg:text-[30px] md:text-[26px] sm:text-[24px] text-[20px] font-poppins text-[white]">
           {content?.name}
         </h1>
-        <p className=" xl:text-[16px] lg:text-[16px] md:text-[14px] sm:text-[12px] font-poppins text-[white]">
+        <p className=" xl:text-[16px] lg:text-[16px] md:text-[14px] sm:text-[12px] text-[13px] font-poppins text-[white]">
           {content?.testimonial}
         </p>
-        <h2 className=" xl:text-[18px] lg:text-[16px] md:text-[14px] sm:text-[12px]  font-poppins text-[white]">
+        <h2 className=" xl:text-[18px] lg:text-[16px] md:text-[14px] sm:text-[12px] text-[14px]  font-poppins text-[white]">
           {content?.position}
         </h2>
       </motion.div>
@@ -74,13 +44,13 @@ const Separtate_testimonal_Component = ({
   );
 };
 
-const Testimonial = () => {
+const Testimonals_Mobile = () => {
   const [currentSelect, setCurrentSelect] = useState(2);
   //-----------------------------------------------------------------------------
   const whole_one_control = useAnimation();
   const image_one_control = useAnimation();
   const text_one_control = useAnimation();
-  const [one_left, set_one_left] = useState(15);
+  const [one_left, set_one_left] = useState(-50);
   //-----------------------------------------------------------------------------
   const whole_two_control = useAnimation();
   const image_two_control = useAnimation();
@@ -90,12 +60,12 @@ const Testimonial = () => {
   const whole_three_control = useAnimation();
   const image_three_control = useAnimation();
   const text_three_control = useAnimation();
-  const [three_left, set_three_left] = useState(85);
+  const [three_left, set_three_left] = useState(150);
   //-----------------------------------------------------------------------------
   const whole_four_control = useAnimation();
   const image_four_control = useAnimation();
   const text_four_control = useAnimation();
-  const [four_left, set_four_left] = useState(120);
+  const [four_left, set_four_left] = useState(250);
   //-----------------------------------------------------------------------------
 
   //-----------------------------------------------------------------------------
@@ -143,7 +113,7 @@ const Testimonial = () => {
     });
   };
 
-  let difference_percentage = 35;
+  let difference_percentage = 100;
 
   const left_scroll_button_click = () => {
     if (currentSelect === 4) {
@@ -281,7 +251,7 @@ const Testimonial = () => {
 
   return (
     <>
-      <div className="w-full h-screen relative overflow-hidden sm:block hidden">
+      <div className="w-full h-screen relative overflow-hidden sm:hidden ">
         {/* ---------------- */}
 
         {/* First */}
@@ -364,4 +334,4 @@ const Testimonial = () => {
   );
 };
 
-export default Testimonial;
+export default Testimonals_Mobile;

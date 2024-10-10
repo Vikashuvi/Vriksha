@@ -7,8 +7,8 @@ import Milestones from './pages/Milestones'
 import Events from './pages/Events'
 import Vision from './pages/Vision';
 import Testimonials from './pages/Testimonials';
-import Hero from './pages/Hero';
-import Advantages from './pages/Advantages'
+import Testimonials_Mobile from './pages/Testimonals_Mobile';
+
 
 function App() {
   return (
@@ -18,6 +18,9 @@ function App() {
       
       <Categories />
       <Events />
+
+      <Testimonials />
+      <Testimonials_Mobile/>
       <Partners />
     </div>
   )
