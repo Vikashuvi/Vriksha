@@ -12,13 +12,15 @@ import Vision from './pages/Vision';
 import Testimonials from './pages/Testimonials';
 import Testimonials_Mobile from './pages/Testimonals_Mobile';
 import CTA from './pages/CTA';
+import HeroAndVisionSection from './pages/HeroAndVisionSection';
+
 function App() {
   const isMobile = useMediaQuery({ maxWidth: 767 })
 
   return (
     <div className="min-h-screen bg-black p-4">
-      <Vision />
-      {isMobile ? <Milestones_Mobile /> : <Milestones />}
+      <HeroAndVisionSection/>
+      
       
       <Categories />
       {isMobile ? <EventsMobile /> : <Events />}

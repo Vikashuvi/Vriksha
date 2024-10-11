@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import mil1 from '../assets/brand1.jpg';
-import mil2 from '../assets/brand2.jpg';
-import mil3 from '../assets/brand3.jpg';
-import mil4 from '../assets/brand4.jpg';
-import { useMediaQuery } from 'react-responsive';
-
+import React from "react";
+import styled from "styled-components";
+import mil1 from "../assets/brand1.jpg";
+import mil2 from "../assets/brand2.jpg";
+import mil3 from "../assets/brand3.jpg";
+import mil4 from "../assets/brand4.jpg";
+import { useMediaQuery } from "react-responsive";
 
 const MilestonesSection = styled.section`
   width: 100%;
   background-color: black;
   color: white;
+  z-index: 20;
 `;
 
 const StickyContainer = styled.div`
@@ -26,8 +26,9 @@ const StickyContainer = styled.div`
 
 const ImageContainer = styled.div`
   position: sticky;
-  top: ${props => props.top};
+  top: ${(props) => props.top};
   width: 100%;
+  z-index: 20;
 
   @media (max-width: 768px) {
     position: static;
@@ -44,9 +45,10 @@ const Figure = styled.figure`
   justify-content: center;
   position: relative;
 
+  z-index: 20;
+
   @media (max-width: 768px) {
     height: 100%;
-    
   }
 `;
 
@@ -60,7 +62,7 @@ const MilestoneText = styled.h2`
   line-height: 0.8;
   white-space: nowrap;
   transform: scaleY(1.2);
-  z-index: 1;
+
   left: 0;
   right: 0;
   text-align: center;
@@ -75,10 +77,11 @@ const MilestoneText = styled.h2`
 const Image = styled.img`
   transition: all 0.3s;
   height: 80%;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
   object-fit: cover;
   border-radius: 0.375rem;
-  display: ${props => props.src ? 'block' : 'none'};
+
+  display: ${(props) => (props.src ? "block" : "none")};
 
   @media (max-width: 768px) {
     width: 90%; // Changed from 100% to 90%
@@ -90,16 +93,16 @@ const Image = styled.img`
 const Milestones = () => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const images = [
-    { src: '', width: '50%', top: '0' },
-    { src: mil1, width: '55%', top: '0' },
-    { src: mil2, width: '60%', top: '2rem' },
-    { src: mil3, width: '65%', top: '4rem' },
-    { src: mil4, width: '70%', top: '6rem' },
+    { src: "", width: "50%", top: "0" },
+    { src: mil1, width: "55%", top: "0" },
+    { src: mil2, width: "60%", top: "2rem" },
+    { src: mil3, width: "65%", top: "4rem" },
+    { src: mil4, width: "70%", top: "6rem" },
   ];
 
-  if (isMobile) {
-    return <MobileMillestones />;
-  }
+  // if (isMobile) {
+  //   return <MobileMillestones />;
+  // }
 
   return (
     <MilestonesSection>
@@ -109,9 +112,9 @@ const Milestones = () => {
             <Figure>
               {index === 0 && <MilestoneText>e-Milestone-M</MilestoneText>}
               {image.src && (
-                <Image 
-                  src={image.src} 
-                  alt={`Milestone ${index + 1}`} 
+                <Image
+                  src={image.src}
+                  alt={`Milestone ${index + 1}`}
                   width={image.width}
                 />
               )}

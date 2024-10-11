@@ -1,15 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
-import mil1 from '../assets/brand1.jpg';
-import mil2 from '../assets/brand2.jpg';
-import mil3 from '../assets/brand3.jpg';
-import mil4 from '../assets/brand4.jpg';
+import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
+import mil1 from "../assets/brand1.jpg";
+import mil2 from "../assets/brand2.jpg";
+import mil3 from "../assets/brand3.jpg";
+import mil4 from "../assets/brand4.jpg";
 
 const MobileSection = styled.section`
   width: 100%;
   background-color: black;
   color: white;
   overflow-x: hidden;
+  z-index: 20;
 `;
 
 const ScrollContainer = styled.div`
@@ -17,6 +18,7 @@ const ScrollContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem 0;
+  z-index: 20;
 `;
 
 const ImageContainer = styled.div`
@@ -25,6 +27,7 @@ const ImageContainer = styled.div`
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 20;
 
   &.visible {
     opacity: 1;
@@ -35,6 +38,7 @@ const ImageContainer = styled.div`
 const Figure = styled.figure`
   width: 100%;
   margin: 0;
+  z-index: 20;
 `;
 
 const Image = styled.img`
@@ -43,6 +47,7 @@ const Image = styled.img`
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 0.375rem;
+  z-index: 20;
 `;
 
 const MilestoneText = styled.h2`
@@ -54,6 +59,7 @@ const MilestoneText = styled.h2`
   line-height: 0.8;
   text-align: center;
   margin-bottom: 2rem;
+  z-index: 20;
 `;
 
 const MobileMillestones = () => {
@@ -65,7 +71,7 @@ const MobileMillestones = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            entry.target.classList.add("visible");
           }
         });
       },

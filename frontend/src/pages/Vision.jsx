@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState, useRef } from "react";
+import styled from "styled-components";
 
 const VisionWrapper = styled.div`
   height: 300vh; // Adjust this value as needed for desired scroll length
@@ -11,10 +11,11 @@ const VisionContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: black;
+  background-color: transparent;
   position: sticky;
   top: 0;
   overflow: hidden;
+  z-index: 20;
 `;
 
 const VisionText = styled.h1`
@@ -27,16 +28,18 @@ const VisionText = styled.h1`
   white-space: nowrap;
   transform: scaleY(1.2);
   position: absolute;
-  z-index: 1;
-  opacity: ${props => 1 - Math.min(1, props.progress * 2)}; // Adjusted for faster darkening
+  opacity: ${(props) =>
+    1 - Math.min(1, props.progress * 2)}; // Adjusted for faster darkening
   transition: opacity 0.3s ease;
+  z-index: 20;
 `;
 
 const VisionParagraph = styled.p`
+  margin-top: 10rem;
   position: absolute;
   left: 10%;
   right: 10%;
-  transform: translateY(${props => 50 - props.progress * 100}%);
+  transform: translateY(${(props) => 50 - props.progress * 100}%);
   font-size: 3vw; // Default font size for larger screens
   color: white;
   max-width: 80%;
@@ -54,8 +57,8 @@ const VisionParagraph = styled.p`
 `;
 
 const Word = styled.span`
-  opacity: ${props => props.visible ? 1 : 0};
-  transform: translateY(${props => props.visible ? '0' : '20px'});
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  transform: translateY(${(props) => (props.visible ? "0" : "20px")});
   transition: opacity 0.3s ease, transform 0.3s ease;
   display: inline-block;
   margin-right: 0.25em;
@@ -70,32 +73,34 @@ const Vision = () => {
   const paragraphRef = useRef(null);
   const [visibleWords, setVisibleWords] = useState(0);
 
-  const paragraphContent = "Every kid is unique—and so is their path to success. Vriksha Global School redefines education by empowering every child to discover their unique potential. We believe in learning beyond classrooms, embracing experiences that foster creativity, critical thinking, and real-world skills. Our holistic approach ensures that sports, arts, and other creative pursuits are valued equally alongside STEM disciplines, allowing students to explore diverse careers and passions. By nurturing each child's individuality, we create an environment where every learner can thrive, follow their dreams, and contribute meaningfully to the world.";
+  const paragraphContent =
+    "Every kid is unique—and so is their path to success. Vriksha Global School redefines education by empowering every child to discover their unique potential. We believe in learning beyond classrooms, embracing experiences that foster creativity, critical thinking, and real-world skills. Our holistic approach ensures that sports, arts, and other creative pursuits are valued equally alongside STEM disciplines, allowing students to explore diverse careers and passions. By nurturing each child's individuality, we create an environment where every learner can thrive, follow their dreams, and contribute meaningfully to the world.";
 
-  const words = paragraphContent.split(' ');
+  const words = paragraphContent.split(" ");
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      const visionElement = document.getElementById('vision-wrapper');
+      const visionElement = document.getElementById("vision-wrapper");
       const visionRect = visionElement.getBoundingClientRect();
-      const visionStart = visionRect.top + window.scrollY;
+      const visionStart = visionRect.top + window.scrollY + 200;
       const visionHeight = visionRect.height;
-      
+
       const paragraphHeight = paragraphRef.current.offsetHeight;
       const windowHeight = window.innerHeight;
-      
+
       // Calculate the scroll distance needed to bring the paragraph end to 75% of the screen height
-      const scrollDistance = visionHeight - (windowHeight * 0.75) - (paragraphHeight / 2);
-      
+      const scrollDistance =
+        visionHeight - windowHeight * 0.75 - paragraphHeight / 2;
+
       const scrollProgress = (scrollPosition - visionStart) / scrollDistance;
-      
+
       setProgress(Math.max(0, Math.min(scrollProgress, 1)));
       setVisibleWords(Math.floor(words.length * scrollProgress));
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [words.length]);
 
   return (
