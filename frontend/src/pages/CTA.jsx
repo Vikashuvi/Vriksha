@@ -18,16 +18,25 @@ const CTAContainer = styled.section`
 `;
 
 const Title = styled.h2`
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   text-align: center;
   color: white;
   position: absolute;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  z-index: 0; // Changed from 1 to 0
-  white-space: nowrap;
+  width: 90%; // Reduced from 100% to give some side padding
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  white-space: normal; // Changed from nowrap to normal
+  word-wrap: break-word;
+  hyphens: auto;
+  
+  @media (max-width: 768px) {
+    font-size: clamp(2rem, 4vw, 1.5rem);
+    top: 42%; // Adjust vertical position for mobile
+  }
 `;
 
 const JoinButton = styled.button`
@@ -85,6 +94,7 @@ const CTA = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [shouldSpread, setShouldSpread] = useState(false);
+  const [showText, setShowText] = useState(false);
   const sectionRef = useRef(null);
   const students = [
     { id: 1, name: 'Student 1', image: Std1 },
@@ -140,16 +150,31 @@ const CTA = () => {
   }, []);
 
   useEffect(() => {
-    let timer;
+    let spreadTimer;
+    let textTimer;
     if (isVisible) {
-      timer = setTimeout(() => {
+      spreadTimer = setTimeout(() => {
         setShouldSpread(true);
-      }, 1000); // 1 second delay before spreading starts
+      }, 1000);
+
+      // Start fading in the text earlier
+      textTimer = setTimeout(() => {
+        setShowText(true);
+      }, 1500); // Reduced from 2000 to 1500
+
+      return () => {
+        clearTimeout(spreadTimer);
+        clearTimeout(textTimer);
+      };
     } else {
       setShouldSpread(false);
+      setShowText(false);
     }
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(spreadTimer);
+      clearTimeout(textTimer);
+    };
   }, [isVisible]);
 
   const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
@@ -188,8 +213,12 @@ const CTA = () => {
 
   return (
     <CTAContainer ref={sectionRef}>
-      <Title>Are You Ready To Give Wings To Your Child?</Title>
-      <JoinButton onClick={handleJoinClick}>Join Now</JoinButton>
+      <Title style={{ opacity: showText ? 1 : 0 }}>
+        Are You Ready To Give Wings To Your Child?
+      </Title>
+      <JoinButton onClick={handleJoinClick} style={{ opacity: showText ? 1 : 0 }}>
+        Join Now
+      </JoinButton>
       <CardContainer>
         {students.map((student, index) => (
           <StudentCard

@@ -13,6 +13,7 @@ import Testimonials from './pages/Testimonials';
 import Testimonials_Mobile from './pages/Testimonals_Mobile';
 import CTA from './pages/CTA';
 import HeroAndVisionSection from './pages/HeroAndVisionSection';
+import Advantages from './pages/Advantages'
 
 function App() {
   const isMobile = useMediaQuery({ maxWidth: 767 })
@@ -23,6 +24,7 @@ function App() {
       
       
       <Categories />
+      <Advantages/>
       {isMobile ? <EventsMobile /> : <Events />}
 
       <Testimonials />

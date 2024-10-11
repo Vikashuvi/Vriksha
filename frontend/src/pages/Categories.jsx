@@ -42,7 +42,7 @@ const AccordionItem = ({ title, image }) => {
 const Categories = () => {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white text-center">Categories</h2>
+      <h2 className="text-5xl sm:text-1xl md:text-7xl font-bold mb-6 md:mb sm:mb-6 text-white text-center">Categories</h2>
       <div className="space-y-2 sm:space-y-4">
         {accordionData.map((item, index) => (
           <AccordionItem key={index} {...item} />

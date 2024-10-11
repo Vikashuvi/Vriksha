@@ -1,51 +1,164 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
-const ServiceItem = ({ title, description }) => (
-  <div className="bg-gray-700 p-6 rounded-lg h-full flex flex-col justify-between">
-    <h3 className="text-4xl font-extrabold mb-4 text-white tracking-tighter leading-none">{title}</h3>
-    <p className="text-xs text-gray-300 uppercase tracking-wide">{description}</p>
-  </div>
-);
+const advantagesData = [
+  {
+    title: "MODERN MICROCOSM",
+    description: "A MICROCOSM OF THE MODERN WORLD, PREPARING STUDENTS FOR GLOBAL CHALLENGES."
+  },
+  {
+    title: "FAMILY ATMOSPHERE",
+    description: "A WELCOMING AND FAMILY-LIKE ATMOSPHERE THAT NURTURES STUDENTS' WELL-BEING."
+  },
+  {
+    title: "HIGH STANDARDS",
+    description: "SETTING AND MAINTAINING HIGH STANDARDS FOR STUDENT ACHIEVEMENT AND EXCELLENCE."
+  },
+  {
+    title: "FOSTERING CURIOSITY",
+    description: "FOSTERING LIVELY INTEREST AND CURIOSITY TO INSPIRE LIFELONG LEARNING."
+  },
+  {
+    title: "INCLUSIVE ENVIRONMENT",
+    description: "NURTURING A SUPPORTIVE AND INCLUSIVE ENVIRONMENT FOR ALL STUDENTS."
+  },
+  {
+    title: "PERSONAL GROWTH",
+    description: "ENCOURAGING PERSONAL AND ACADEMIC GROWTH TO DEVELOP WELL-ROUNDED INDIVIDUALS."
+  }
+];
 
-const ServiceSection = () => {
-  const services = [
-    { title: "UI/UX DESIGN", description: "CREATING INTUITIVE AND ENGAGING USER INTERFACES TO ENHANCE USER EXPERIENCE." },
-    { title: "GRAPHIC DESIGN", description: "DESIGNING LOGOS, BRANDING MATERIALS, AND PROMOTIONAL GRAPHICS FOR BUSINESSES." },
-    { title: "WEB DESIGN", description: "CRAFTING VISUALLY APPEALING AND USER-FRIENDLY WEBSITES TAILORED TO CLIENTS' NEEDS" },
-    { title: "PROTOTYPING", description: "BUILDING INTERACTIVE PROTOTYPES TO VISUALIZE AND TEST BEFORE DEVELOPMENT." },
-    { title: "ILLUSTRATION", description: "CREATING CUSTOM ILLUSTRATIONS AND ARTWORK TO COMPLEMENT DIGITAL DESIGNS." },
-    { title: "BRAND IDENTITY", description: "CRAFTING BRAND IDENTITIES WITH LOGOS, COLOR SCHEMES, AND TYPOGRAPHY." },
-  ];
+const Advantages = () => {
+  const sectionRef = useRef(null);
+  const cardsRef = useRef([]);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Adjust this breakpoint as needed
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // Skip scroll effect for mobile
+
+    let rafId = null;
+    let lastScrollTop = 0;
+
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const sectionRect = sectionRef.current.getBoundingClientRect();
+      const sectionTop = sectionRect.top;
+      const sectionHeight = sectionRect.height;
+      const windowHeight = window.innerHeight;
+
+      // Calculate how far through the section we've scrolled (0 to 1)
+      const newScrollProgress = Math.max(0, Math.min(1, (windowHeight - sectionTop) / (windowHeight + sectionHeight)));
+
+      // Only update if the change is significant
+      if (Math.abs(newScrollProgress - scrollProgress) > 0.01) {
+        setScrollProgress(newScrollProgress);
+      }
+    };
+
+    const smoothScroll = () => {
+      const currentScrollTop = window.pageYOffset;
+      if (lastScrollTop === currentScrollTop) {
+        rafId = requestAnimationFrame(smoothScroll);
+        return;
+      }
+      lastScrollTop = currentScrollTop;
+      handleScroll();
+      rafId = requestAnimationFrame(smoothScroll);
+    };
+
+    smoothScroll();
+
+    return () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
+  }, [scrollProgress, isMobile]);
+
+  useEffect(() => {
+    if (isMobile) {
+      // Reset card positions for mobile
+      cardsRef.current.forEach(card => {
+        if (card) card.style.transform = 'translateX(0)';
+      });
+      return;
+    }
+
+    cardsRef.current.forEach((card, index) => {
+      if (!card) return;
+      
+      const isUpperRow = index < 3;
+      const maxMove = 150; // increased for more noticeable effect
+      
+      // Apply easing to the movement
+      const easeInOutCubic = t => t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1;
+      const easedProgress = easeInOutCubic(scrollProgress);
+      
+      // Calculate the movement based on scroll progress
+      const movement = easedProgress * maxMove * (isUpperRow ? 1 : -1);
+      
+      card.style.transform = `translateX(${movement}px)`;
+    });
+  }, [scrollProgress, isMobile]);
 
   return (
-    <section className="bg-black py-20">
-      <div className="container mx-auto px-4 relative">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="h-64"
+    <section ref={sectionRef} className="bg-black min-h-screen flex items-center justify-center py-12 overflow-hidden relative">
+      <div className="container mx-auto px-4">
+        {/* Mobile heading */}
+        <h1 className="text-3xl font-bold text-white mb-8 text-center md:hidden">Advantages</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+          {advantagesData.map((advantage, index) => (
+            <div 
+              key={index} 
+              ref={el => cardsRef.current[index] = el}
+              className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-gray-200 border-opacity-20 rounded-lg p-6 flex flex-col justify-between h-full transition-transform duration-300 ease-out hover:bg-opacity-20"
             >
-              <ServiceItem {...service} />
-            </motion.div>
+              <h2 className="text-xl md:text-2xl font-bold mb-4 uppercase text-white">{advantage.title}</h2>
+              <p className="text-sm leading-relaxed text-gray-300">{advantage.description}</p>
+            </div>
           ))}
-        </div>
-        <motion.div 
-          className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center">
-            <span className="text-black font-bold text-lg uppercase">Services</span>
+          
+          {/* Circular element with larger rotating text and smaller central text */}
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 hidden md:block">
+            <div className="relative w-full h-full bg-white rounded-full">
+              <svg className="w-full h-full animate-spin-slow" viewBox="0 0 100 100">
+                <defs>
+                  <path id="circlePath" 
+                    d="M 50, 50 m -37, 0 a 37,37 0 0,1 74,0 a 37,37 0 0,1 -74,0" 
+                    fill="none" />
+                </defs>
+                <text fill="black" fontSize="5">
+                  <textPath xlinkHref="#circlePath" startOffset="0">
+                  VRIKSHA GIVES WINGS
+TO
+YOUR CHILD'S DREAM • VRIKSHA GIVES WINGS
+TO
+YOUR CHILD'S DREAM •
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-black text-sm font-bold text-center leading-tight">ADVANTAGES</span>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default ServiceSection;
+export default Advantages;
