@@ -4,6 +4,8 @@ import mil1 from '../assets/brand1.jpg';
 import mil2 from '../assets/brand2.jpg';
 import mil3 from '../assets/brand3.jpg';
 import mil4 from '../assets/brand4.jpg';
+import { useMediaQuery } from 'react-responsive';
+
 
 const MilestonesSection = styled.section`
   width: 100%;
@@ -86,6 +88,7 @@ const Image = styled.img`
 `;
 
 const Milestones = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const images = [
     { src: '', width: '50%', top: '0' },
     { src: mil1, width: '55%', top: '0' },
@@ -93,6 +96,10 @@ const Milestones = () => {
     { src: mil3, width: '65%', top: '4rem' },
     { src: mil4, width: '70%', top: '6rem' },
   ];
+
+  if (isMobile) {
+    return <MobileMillestones />;
+  }
 
   return (
     <MilestonesSection>
