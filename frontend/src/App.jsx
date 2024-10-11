@@ -11,7 +11,7 @@ import EventsMobile from './pages/Event_Mobile'
 import Vision from './pages/Vision';
 import Testimonials from './pages/Testimonials';
 import Testimonials_Mobile from './pages/Testimonals_Mobile';
-
+import CTA from './pages/CTA';
 function App() {
   const isMobile = useMediaQuery({ maxWidth: 767 })
 
@@ -26,6 +26,7 @@ function App() {
       <Testimonials />
       <Testimonials_Mobile/>
       <Partners />
+      <CTA />
     </div>
   )
 }
