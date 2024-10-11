@@ -26,9 +26,9 @@ const Title = styled.h2`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%; // Reduced from 100% to give some side padding
-  z-index: 0;
+  z-index: 10; // Increased z-index to match the button
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease; // Increased duration to 0.6s
   white-space: normal; // Changed from nowrap to normal
   word-wrap: break-word;
   hyphens: auto;
@@ -43,7 +43,7 @@ const JoinButton = styled.button`
   position: absolute;
   top: 54%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(var(--scale, 0.9));
   padding: 12px 24px;
   font-size: 1.2rem;
   font-weight: bold;
@@ -52,13 +52,13 @@ const JoinButton = styled.button`
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 0;
+  opacity: var(--opacity, 0);
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
 
   &:hover {
-    background-color: #f0f0f0;
-    transform: translateX(-50%) scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%) scale(calc(var(--scale, 1) * 1.05)) rotate(5deg);
+    box-shadow: 0 8px 15px -5px rgba(255, 255, 255, 0.5);
   }
 `;
 
@@ -67,7 +67,7 @@ const CardContainer = styled.div`
   width: 200px;
   height: 200px;
   perspective: 1000px;
-  z-index: 1; // Added z-index to ensure cards are above text and button
+  z-index: 1; // Ensure this is lower than the button's z-index
 `;
 
 const StudentCard = styled.div`
@@ -155,12 +155,12 @@ const CTA = () => {
     if (isVisible) {
       spreadTimer = setTimeout(() => {
         setShouldSpread(true);
-      }, 1000);
+      }, 800); // Increased from 700ms to 800ms
 
-      // Start fading in the text earlier
+      // Delay for both text and button fade-in
       textTimer = setTimeout(() => {
         setShowText(true);
-      }, 1500); // Reduced from 2000 to 1500
+      }, 1500); // Increased from 1200ms to 1500ms
 
       return () => {
         clearTimeout(spreadTimer);
@@ -216,7 +216,13 @@ const CTA = () => {
       <Title style={{ opacity: showText ? 1 : 0 }}>
         Are You Ready To Give Wings To Your Child?
       </Title>
-      <JoinButton onClick={handleJoinClick} style={{ opacity: showText ? 1 : 0 }}>
+      <JoinButton 
+        onClick={handleJoinClick} 
+        style={{ 
+          '--opacity': showText ? 1 : 0,
+          '--scale': showText ? 1 : 0.9,
+        }}
+      >
         Join Now
       </JoinButton>
       <CardContainer>
