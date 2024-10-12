@@ -40,43 +40,34 @@ const VisionParagraph = styled.p`
   left: 10%;
   right: 10%;
   transform: translateY(${(props) => 50 - props.progress * 100}%);
-  font-size: 3vw; // Default font size for larger screens
+  font-size: 3vw;
   color: white;
   max-width: 80%;
   text-align: left;
   z-index: 3;
-  opacity: 1;
 
   @media (max-width: 768px) {
-    font-size: 5vw; // Increased font size for mobile
+    font-size: 5vw;
     left: 5%;
     right: 5%;
     max-width: 90%;
-    line-height: 1.4; // Improved line height for readability
+    line-height: 1.4;
   }
 `;
 
 const Word = styled.span`
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  transform: translateY(${(props) => (props.visible ? "0" : "20px")});
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  display: inline-block;
-  margin-right: 0.25em;
-
-  @media (max-width: 768px) {
-    margin-right: 0.15em; // Slightly reduced margin for mobile
-  }
+  opacity: ${(props) => (props.visible ? 0.9 : 0.2)}; // Increased opacity for visible words
+  transition: opacity 0.3s ease;
 `;
 
 const Vision = () => {
   const [progress, setProgress] = useState(0);
-  const paragraphRef = useRef(null);
   const [visibleWords, setVisibleWords] = useState(0);
+  const paragraphRef = useRef(null);
 
-  const paragraphContent =
-    "Every kid is unique—and so is their path to success. Vriksha Global School redefines education by empowering every child to discover their unique potential. We believe in learning beyond classrooms, embracing experiences that foster creativity, critical thinking, and real-world skills. Our holistic approach ensures that sports, arts, and other creative pursuits are valued equally alongside STEM disciplines, allowing students to explore diverse careers and passions. By nurturing each child's individuality, we create an environment where every learner can thrive, follow their dreams, and contribute meaningfully to the world.";
+  const paragraphContent = "Every kid is unique—and so is their path to success. Vriksha Global School redefines education by empowering every child to discover their unique potential. We believe in learning beyond classrooms, embracing experiences that foster creativity, critical thinking, and real-world skills. Our holistic approach ensures that sports, arts, and other creative pursuits are valued equally alongside STEM disciplines, allowing students to explore diverse careers and passions. By nurturing each child's individuality, we create an environment where every learner can thrive, follow their dreams, and contribute meaningfully to the world.";
 
-  const words = paragraphContent.split(" ");
+  const words = paragraphContent.split(' ');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,10 +80,7 @@ const Vision = () => {
       const paragraphHeight = paragraphRef.current.offsetHeight;
       const windowHeight = window.innerHeight;
 
-      // Calculate the scroll distance needed to bring the paragraph end to 75% of the screen height
-      const scrollDistance =
-        visionHeight - windowHeight * 0.75 - paragraphHeight / 2;
-
+      const scrollDistance = visionHeight - windowHeight * 0.75 - paragraphHeight / 2;
       const scrollProgress = (scrollPosition - visionStart) / scrollDistance;
 
       setProgress(Math.max(0, Math.min(scrollProgress, 1)));
@@ -110,7 +98,7 @@ const Vision = () => {
         <VisionParagraph ref={paragraphRef} progress={progress}>
           {words.map((word, index) => (
             <Word key={index} visible={index < visibleWords}>
-              {word}
+              {word}{' '}
             </Word>
           ))}
         </VisionParagraph>
