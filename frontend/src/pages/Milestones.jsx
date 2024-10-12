@@ -1,129 +1,217 @@
-import React from "react";
-import styled from "styled-components";
-import mil1 from "../assets/brand1.jpg";
-import mil2 from "../assets/brand2.jpg";
-import mil3 from "../assets/brand3.jpg";
-import mil4 from "../assets/brand4.jpg";
-import { useMediaQuery } from "react-responsive";
+import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef } from "react";
 
-const MilestonesSection = styled.section`
-  width: 100%;
-  background-color: black;
-  color: white;
-  z-index: 20;
-`;
+const src1 =
+  "https://cdn.prod.website-files.com/655b7190087a6311406b7e18/655b7190087a6311406b7eb0_jakob-owens-5_dFX9aAfs8-unsplash.jpg";
 
-const StickyContainer = styled.div`
-  position: relative;
+const src2 =
+  "https://cdn.prod.website-files.com/655b7190087a6311406b7e18/655b7190087a6311406b7ead_jakob-owens-5yN5Bz0_968-unsplash.jpg";
 
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0; // Reduced padding
-  }
-`;
+const Milestone_actual_animation = () => {
+  const fullRef = useRef();
 
-const ImageContainer = styled.div`
-  position: sticky;
-  top: ${(props) => props.top};
-  width: 100%;
-  z-index: 20;
+  const fullRef_useScroll = useScroll({
+    target: fullRef,
+    offset: ["0 1", "1 1"],
+  });
 
-  @media (max-width: 768px) {
-    position: static;
-    width: 100%; // Changed from 90% to 100%
-    margin-bottom: 1rem; // Reduced margin
-  }
-`;
+  //----------------------------------------------------
 
-const Figure = styled.figure`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  const image_one_rotate = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.1, 0.2],
+    [-90, 0, 90]
+  );
+  const image_one_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.2],
+    ["105%", "-5%"]
+  );
+  const scale_one_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.08, 0.12, 0.2],
+    [0.8, 1, 1, 0.8]
+  );
 
-  z-index: 20;
+  //-----------------------------------------------------
 
-  @media (max-width: 768px) {
-    height: 100%;
-  }
-`;
+  const image_two_rotate = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.2, 0.3, 0.4],
+    [-90, 0, 90]
+  );
+  const image_two_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.2, 0.4],
+    ["105%", "-5%"]
+  );
+  const scale_two_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.2, 0.28, 0.32, 0.4],
+    [0.8, 1, 1, 0.8]
+  );
 
-const MilestoneText = styled.h2`
-  position: absolute;
-  font-size: 14vw;
-  font-weight: 900;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: -0.05em;
-  line-height: 0.8;
-  white-space: nowrap;
-  transform: scaleY(1.2);
+  //---------------------------------------------------
 
-  left: 0;
-  right: 0;
-  text-align: center;
-  overflow: hidden;
+  const image_three_rotate = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.4, 0.5, 0.6],
+    [-90, 0, 90]
+  );
+  const image_three_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.4, 0.6],
+    ["105%", "-5%"]
+  );
+  const scale_three_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.4, 0.48, 0.52, 0.6],
+    [0.8, 1, 1, 0.8]
+  );
 
-  @media (max-width: 768px) {
-    font-size: 10vw;
-    position: static;
-  }
-`;
+  //-------------------------------------------------------
 
-const Image = styled.img`
-  transition: all 0.3s;
-  height: 80%;
-  width: ${(props) => props.width};
-  object-fit: cover;
-  border-radius: 0.375rem;
+  const image_four_rotate = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.6, 0.7, 0.8],
+    [-90, 0, 90]
+  );
+  const image_four_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.6, 0.8],
+    ["105%", "-5%"]
+  );
+  const scale_four_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.6, 0.68, 0.72, 0.8],
+    [0.8, 1, 1, 0.8]
+  );
 
-  display: ${(props) => (props.src ? "block" : "none")};
+  //---------------------------------------------------------
 
-  @media (max-width: 768px) {
-    width: 90%; // Changed from 100% to 90%
-    height: auto; // Changed from 100% to auto
-    aspect-ratio: 1 / 1; // Added to maintain a square aspect ratio
-  }
-`;
+  const image_five_rotate = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.8, 0.9, 1],
+    [-90, 0, 90]
+  );
+  const image_five_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.8, 1],
+    ["105%", "-5%"]
+  );
+  const scale_five_top = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0.8, 0.88, 0.92, 1],
+    [0.8, 1, 1, 0.8]
+  );
 
-const Milestones = () => {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-  const images = [
-    { src: "", width: "50%", top: "0" },
-    { src: mil1, width: "55%", top: "0" },
-    { src: mil2, width: "60%", top: "2rem" },
-    { src: mil3, width: "65%", top: "4rem" },
-    { src: mil4, width: "70%", top: "6rem" },
-  ];
+  //-----------------------------------------------------------
 
-  // if (isMobile) {
-  //   return <MobileMillestones />;
-  // }
+  const text_ref = useRef();
+
+  const text_useScroll = useScroll({
+    target: text_ref,
+    offset: ["0 1", "0 0"],
+  });
+
+  const top_text = useTransform(
+    text_useScroll.scrollYProgress,
+    [0, 1],
+    ["115%", "-30%"]
+  );
 
   return (
-    <MilestonesSection>
-      <StickyContainer>
-        {images.map((image, index) => (
-          <ImageContainer key={index} top={image.top}>
-            <Figure>
-              {index === 0 && <MilestoneText>e-Milestone-M</MilestoneText>}
-              {image.src && (
-                <Image
-                  src={image.src}
-                  alt={`Milestone ${index + 1}`}
-                  width={image.width}
-                />
-              )}
-            </Figure>
-          </ImageContainer>
-        ))}
-      </StickyContainer>
-    </MilestonesSection>
+    <>
+      <div
+        ref={text_ref}
+        className=" relative text-[5vw]  w-full font-bold text-[white] h-[400px] text-center "
+      >
+        <motion.h1
+          style={{
+            x: "-50%",
+            y: "-50%",
+            left: "50%",
+            top: top_text,
+          }}
+          className="text-[18vw] font-black text-white uppercase tracking-[-0.05em] leading-[0.8] whitespace-nowrap scale-y-[1.2] fixed z-[2] "
+        >
+          Milestone
+        </motion.h1>
+      </div>
+      <div ref={fullRef} className=" w-full h-[300vh]">
+        <motion.div
+          style={{
+            x: "-50%",
+            y: "-50%",
+            left: "50%",
+
+            top: image_one_top,
+            rotateX: image_one_rotate,
+            scale: scale_one_top,
+          }}
+          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+        >
+          <img src={src1} className=" w-full h-full object-cover " />
+        </motion.div>
+        <motion.div
+          style={{
+            x: "-50%",
+            y: "-50%",
+            left: "50%",
+
+            top: image_two_top,
+            rotateX: image_two_rotate,
+            scale: scale_two_top,
+          }}
+          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+        >
+          <img src={src2} className=" w-full h-full object-cover " />
+        </motion.div>
+        <motion.div
+          style={{
+            x: "-50%",
+            y: "-50%",
+            left: "50%",
+
+            top: image_three_top,
+            rotateX: image_three_rotate,
+            scale: scale_three_top,
+          }}
+          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+        >
+          <img src={src1} className=" w-full h-full object-cover " />
+        </motion.div>
+        <motion.div
+          style={{
+            x: "-50%",
+            y: "-50%",
+            left: "50%",
+
+            top: image_four_top,
+            rotateX: image_four_rotate,
+            scale: scale_four_top,
+          }}
+          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+        >
+          <img src={src2} className=" w-full h-full object-cover " />
+        </motion.div>
+        <motion.div
+          style={{
+            x: "-50%",
+            y: "-50%",
+            left: "50%",
+
+            top: image_five_top,
+            rotateX: image_five_rotate,
+            scale: scale_five_top,
+          }}
+          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+        >
+          <img src={src1} className=" w-full h-full object-cover " />
+        </motion.div>
+      </div>
+    </>
   );
 };
 
-export default Milestones;
+export default Milestone_actual_animation;

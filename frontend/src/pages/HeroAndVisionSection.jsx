@@ -22,14 +22,14 @@ const HeroAndVisionSection = () => {
 
   const logo_top = useTransform(
     full_ref_useScroll?.scrollYProgress,
-    [0, 0.15, 0.17, 0.32, 0.6, 0.9, 1],
-    ["150%", "150%", "100%", "50%", "50%", "50%", "-100%"]
+    [0, 0.27, 0.33, 0.45, 0.82, 0.9, 1],
+    ["150%", "83%", "50%", "50%", "50%", "-30%", "-30%"]
   );
 
   const logo_scale = useTransform(
     full_ref_useScroll?.scrollYProgress,
-    [0, 0.15, 0.17, 0.32, 0.35, 0.4, 0.55],
-    [0.5, 0.5, 0.6, 1, 1.7, 2, 1]
+    [0, 0.33, 0.35, 0.38, 0.52, 0.55, 0.82, 1],
+    [0.25, 1, 1, 2, 2, 1, 1, 0.5]
   );
 
   return (
