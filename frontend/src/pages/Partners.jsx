@@ -37,19 +37,21 @@ const Partners = () => {
   }, []);
 
   return (
-    <section className="bg-black text-white py-16 min-h-screen flex flex-col justify-center overflow-hidden">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-white text-center">Partners</h2>
+    <section className="bg-black text-white py-12 flex flex-col justify-center overflow-hidden">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-white text-center">Partners</h2>
         
         <div className="relative overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black to-transparent z-10"></div>
           <div ref={scrollRef} className="flex overflow-x-hidden">
             {[...partners, ...partners].map((partner, index) => (
               <div key={index} className="flex-shrink-0 mx-4 sm:mx-6">
-                <div className="bg-white p-4 rounded-lg shadow-md w-40 h-40 flex items-center justify-center">
+                <div className="bg-white p-4 rounded-lg shadow-md w-48 h-48 flex items-center justify-center">
                   <img 
                     src={partner.logo} 
                     alt={`${partner.name} logo`} 
-                    className="max-h-32 max-w-32 object-contain" 
+                    className="max-h-40 max-w-40 object-contain" 
                   />
                 </div>
               </div>

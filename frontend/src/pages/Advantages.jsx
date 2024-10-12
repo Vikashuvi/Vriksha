@@ -119,15 +119,15 @@ const Advantages = () => {
         {/* Mobile heading */}
         <h1 className="text-3xl font-bold text-white mb-8 text-center md:hidden">Advantages</h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative max-w-4xl mx-auto">
           {advantagesData.map((advantage, index) => (
             <div 
               key={index} 
               ref={el => cardsRef.current[index] = el}
-              className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-gray-200 border-opacity-20 rounded-lg p-6 flex flex-col justify-between h-full transition-transform duration-300 ease-out hover:bg-opacity-20"
+              className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-gray-200 border-opacity-20 rounded-lg p-4 md:p-6 sm:p-5 flex flex-col justify-between h-64 transition-transform duration-300 ease-out hover:bg-opacity-20"
             >
-              <h2 className="text-xl md:text-2xl font-bold mb-4 uppercase text-white">{advantage.title}</h2>
-              <p className="text-sm leading-relaxed text-gray-300">{advantage.description}</p>
+              <h2 className="text-base sm:text-lg md:text-3xl font-bold mb-2 uppercase text-white px-3 py-2">{advantage.title}</h2>
+              <p className="text-xs md:text-xs sm:text-sm leading-tight text-gray-300 px-3 py-8">{advantage.description}</p>
             </div>
           ))}
           

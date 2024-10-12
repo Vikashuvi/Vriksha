@@ -26,9 +26,9 @@ const Title = styled.h2`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%; // Reduced from 100% to give some side padding
-  z-index: 10; // Increased z-index to match the button
+  z-index: 10; // Increased z-index to ensure it's above the cards
   opacity: 0;
-  transition: opacity 0.6s ease; // Increased duration to 0.6s
+  transition: opacity 0s; // Changed from 0.6s to 0s
   white-space: normal; // Changed from nowrap to normal
   word-wrap: break-word;
   hyphens: auto;
@@ -53,8 +53,8 @@ const JoinButton = styled.button`
   border-radius: 50px;
   cursor: pointer;
   opacity: var(--opacity, 0);
-  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 10;
+  transition: opacity 0s, transform 0s, box-shadow 0.3s ease; // Changed opacity and transform to 0s
+  z-index: 10; // Increased z-index to ensure it's above the cards
 
   &:hover {
     transform: translateX(-50%) scale(calc(var(--scale, 1) * 1.05)) rotate(5deg);
@@ -76,11 +76,12 @@ const StudentCard = styled.div`
   height: 200px;
   border-radius: 24px;
   overflow: hidden;
-  transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.8s ease;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out; // Added easing
   backface-visibility: hidden;
 
   &:hover {
-    transform: scale(1.05) translateZ(20px);
+    transform: scale(1.1) translateZ(30px) rotate(5deg); // Enhanced hover effect
+    z-index: 20; // Bring hovered card to front
   }
 `;
 
@@ -94,8 +95,9 @@ const CTA = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [shouldSpread, setShouldSpread] = useState(false);
-  const [showText, setShowText] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(true);
   const sectionRef = useRef(null);
+  const lastScrollTop = useRef(0);
   const students = [
     { id: 1, name: 'Student 1', image: Std1 },
     { id: 2, name: 'Student 2', image: Std2 },
@@ -125,18 +127,23 @@ const CTA = () => {
         const sectionHeight = rect.height;
         const sectionTop = rect.top;
         const viewportHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
+        // Determine scroll direction
+        const currentScrollingDown = scrollTop > lastScrollTop.current;
+        setIsScrollingDown(currentScrollingDown);
+        lastScrollTop.current = scrollTop;
+
         if (sectionTop <= viewportHeight && sectionTop > -sectionHeight) {
           setIsVisible(true);
           const scrolledPastSection = Math.max(0, viewportHeight - sectionTop);
           const progress = Math.min(1, scrolledPastSection / (sectionHeight + viewportHeight));
           setScrollProgress(progress);
-        } else if (sectionTop > viewportHeight) {
-          setIsVisible(false);
-          setScrollProgress(0);
+          setShouldSpread(progress > 0.1);
         } else {
           setIsVisible(false);
-          setScrollProgress(1);
+          setScrollProgress(0);
+          setShouldSpread(false);
         }
       }
     };
@@ -149,60 +156,26 @@ const CTA = () => {
     };
   }, []);
 
-  useEffect(() => {
-    let spreadTimer;
-    let textTimer;
-    if (isVisible) {
-      spreadTimer = setTimeout(() => {
-        setShouldSpread(true);
-      }, 800); // Increased from 700ms to 800ms
-
-      // Delay for both text and button fade-in
-      textTimer = setTimeout(() => {
-        setShowText(true);
-      }, 1500); // Increased from 1200ms to 1500ms
-
-      return () => {
-        clearTimeout(spreadTimer);
-        clearTimeout(textTimer);
-      };
-    } else {
-      setShouldSpread(false);
-      setShowText(false);
-    }
-
-    return () => {
-      clearTimeout(spreadTimer);
-      clearTimeout(textTimer);
-    };
-  }, [isVisible]);
-
   const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
 
   const getCardPosition = (index) => {
-    if (!shouldSpread) {
-      return {
-        transform: 'translate3d(0, 0, 0) scale(1)',
-        opacity: 1,
-      };
-    }
-
     const { x, y, scale } = presetPositions[index % presetPositions.length];
     
-    const easedProgress = easeInOutCubic(scrollProgress);
-    const spreadFactor = 1 + easedProgress * 1.5; // Reduced from 2 to 1.5
+    // Using the new spreadFactor calculation
+    const spreadFactor = 1 + (shouldSpread ? scrollProgress * 2 : 0);
     
-    // Use Math.min to limit the spread
-    let xPixels = Math.min((x / 100) * window.innerWidth * easedProgress * spreadFactor, window.innerWidth / 2);
-    let yPixels = Math.min((y / 100) * window.innerHeight * easedProgress * spreadFactor, window.innerHeight / 2);
-    const z = 50 * easedProgress;
+    let xPixels = (x / 100) * window.innerWidth * scrollProgress * spreadFactor;
+    let yPixels = (y / 100) * window.innerHeight * scrollProgress * spreadFactor;
+    const z = 50 * scrollProgress;
 
-    const minScale = 0.6;
-    const currentScale = scale - (scale - minScale) * easedProgress;
+    // Adjust the scale range
+    const maxScale = scale;
+    const minScale = 0.4;
+    const currentScale = maxScale - (maxScale - minScale) * (scrollProgress * 1.2);
     
     return {
       transform: `translate3d(${xPixels}px, ${yPixels}px, ${z}px) scale(${currentScale})`,
-      opacity: 1 - easedProgress * 0.5,
+      opacity: 1 - scrollProgress * 0.7, // Adjusted for a smoother fade-out
     };
   };
 
@@ -211,16 +184,33 @@ const CTA = () => {
     console.log('Join button clicked');
   };
 
+  // Helper function to calculate opacity
+  const calculateOpacity = (progress) => {
+    if (!isScrollingDown) {
+      return Math.max(0, progress - 0.3);
+    }
+    // Start fade-in earlier and make it more gradual
+    return Math.min(1, progress * 2);
+  };
+
   return (
     <CTAContainer ref={sectionRef}>
-      <Title style={{ opacity: showText ? 1 : 0 }}>
+      <Title style={{ 
+        opacity: calculateOpacity(scrollProgress),
+        transition: isScrollingDown 
+          ? 'opacity 0.3s ease-in' 
+          : 'opacity 0.08s ease-out'
+      }}>
         Are You Ready To Give Wings To Your Child?
       </Title>
       <JoinButton 
         onClick={handleJoinClick} 
         style={{ 
-          '--opacity': showText ? 1 : 0,
-          '--scale': showText ? 1 : 0.9,
+          '--opacity': calculateOpacity(scrollProgress),
+          '--scale': scrollProgress > 0.5 ? 1 : 0.9,
+          transition: isScrollingDown 
+            ? 'opacity 0.3s ease-in, transform 0.3s ease-in' 
+            : 'opacity 0.08s ease-out, transform 0.08s ease-out'
         }}
       >
         Join Now

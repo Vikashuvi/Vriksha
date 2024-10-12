@@ -13,7 +13,7 @@ let src4 =
   "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e1bcdc76d1db31e6546969_template-img-06-p-500.webp";
 
 const Hero = () => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isMobile = useMediaQuery({ maxWidth: 920 });
   const isMobile_Small = useMediaQuery({ maxWidth: 520 });
 
   const fullRef = useRef();
@@ -29,9 +29,9 @@ const Hero = () => {
 
   let left_array_one = isMobile
     ? isMobile_Small
-      ? ["15%", "15%", "-15%", "-15%"]
-      : ["25%", "25%", "-5%", "-5%"]
-    : ["35%", "32.5%", "6%", "6%"];
+      ? ["22%", "22%", "-5%", "-5%"]
+      : ["25%", "25%", "0%", "0%"]
+    : ["32%", "12%", "12%", "12%"];
 
   const left_full_one = useTransform(
     fullRef_useScroll?.scrollYProgress,
@@ -41,92 +41,110 @@ const Hero = () => {
 
   const top_full_one = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 0.8, 1],
-    ["55%", "30%", "30%", "30%", "-100%"]
+    [0, 0.15, 0.8, 1],
+    ["55%", "30%", "30%", "-100%"]
   );
 
   const rotateX_one = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 1],
-    [0, 5, 10, 10]
+    [0, 0.1, 0.33, 1],
+    [4, 12, 12, 12]
+  );
+
+  const rotateY_one = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.1, 0.33, 1],
+    [4, 20, 38, 38]
   );
 
   //------ Image 2 ------------------
 
   let left_array_two = isMobile
     ? isMobile_Small
-      ? ["75%", "75%", "115%", "115%"]
-      : ["70%", "70%", "105%", "105%"]
-    : ["62.5%", "65%", "94%", "94%"];
+      ? ["75%", "105%", "105%"]
+      : ["70%", "105%", "105%"]
+    : ["65%", "90%", "90%"];
 
   const left_full_two = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 1],
+    [0, 0.66, 1],
     left_array_two
   );
 
   const top_full_two = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 0.8, 1],
-    ["55%", "30%", "30%", " 30%", "-100%"]
+    [0, 0.15, 0.8, 1],
+    ["55%", "30%", "30%", "-100%"]
   );
 
   const rotateX_two = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 1],
-    [0, -5, -10, -10]
+    [0, 0.1, 0.33, 1],
+    [-2, -10, -10, -10]
+  );
+
+  const rotateY_two = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.1, 0.33, 1],
+    [4, 20, 38, 38]
   );
 
   //------ Image 3 -------------------
 
   let left_array_three = isMobile
     ? isMobile_Small
-      ? ["30%", "30%", "-17%", "-17%"]
+      ? ["30%", "30%", "-7%", "-7%"]
       : ["35%", "35%", "-7%", "-7%"]
-    : ["40%", "37%", "4%", "4%"];
+    : ["40%", "40%", "10%", "10%"];
 
   const left_full_three = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 1],
+    [0, 0.15, 0.66, 1],
     left_array_three
   );
 
   const top_full_three = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 0.8, 1],
-    ["75%", "60%", "60%", "60%", "-100%"]
+    [0, 0.15, 0.8, 1],
+    ["75%", "55%", "55%", "-100%"]
   );
 
   const rotateX_three = useTransform(
     fullRef_useScroll?.scrollYProgress,
     [0, 0.33, 0.66, 1],
-    [0, 5, 10, 10]
+    [2, 5, 10, 10]
+  );
+
+  const rotateY_three = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.33, 0.66, 1],
+    [4, 20, 38, 38]
   );
 
   // ------ Image 4 ------------------
 
   let left_array_four = isMobile
     ? isMobile_Small
-      ? ["70%", "70%", "117%", "117%"]
+      ? ["70%", "70%", "107%", "107%"]
       : ["63%", "63%", "107%", "107%"]
-    : ["57%", "60%", "96%", "96%"];
+    : ["62%", "62%", "92%", "92%"];
 
   const left_full_four = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 1],
+    [0, 0.15, 0.66, 1],
     left_array_four
   );
 
   const top_full_four = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 0.8, 1],
-    ["75%", "60%", "60%", "60%", "-100%"]
+    [0, 0.15, 0.8, 1],
+    ["75%", "55%", "55%", "-100%"]
   );
 
   const rotateX_four = useTransform(
     fullRef_useScroll?.scrollYProgress,
     [0, 0.33, 0.66, 1],
-    [0, -7, -10, -10]
+    [-2, -5, -10, -10]
   );
 
   //----------------------------------
@@ -143,6 +161,12 @@ const Hero = () => {
     [0.7, 1, 1.5, 1.5, 1.5]
   );
 
+  const rotateY_four = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.33, 0.66, 1],
+    [4, 20, 38, 38]
+  );
+
   return (
     <div className=" w-full h-[300vh]" ref={fullRef}>
       {/* ------ Image 1 ------- */}
@@ -153,9 +177,9 @@ const Hero = () => {
           x: "-50%",
           y: "-50%",
           rotateX: rotateX_one,
-          rotateY: 20,
+          rotateY: rotateY_one,
         }}
-        className=" fixed lg:w-[350px] lg:h-[350px] md:w-[300px] md:h-[300px] w-[250px] h-[250px] top-[55%] left-[35%]   z-[10]"
+        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[55%] left-[35%]   z-[10]"
       >
         <img src={src1} className=" w-full h-full object-cover" />
       </motion.div>
@@ -167,9 +191,9 @@ const Hero = () => {
           x: "-50%",
           y: "-50%",
           rotateX: rotateX_two,
-          rotateY: 20,
+          rotateY: rotateY_two,
         }}
-        className=" fixed lg:w-[350px] lg:h-[350px] md:w-[300px] md:h-[300px] w-[250px] h-[250px] top-[55%] left-[70%] -translate-x-[50%] -translate-y-[50%] z-[10]"
+        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[55%] left-[70%] -translate-x-[50%] -translate-y-[50%] z-[10]"
       >
         <img src={src3} className=" w-full h-full object-cover" />
       </motion.div>
@@ -182,9 +206,9 @@ const Hero = () => {
           x: "-50%",
           y: "-50%",
           rotateX: rotateX_three,
-          rotateY: 20,
+          rotateY: rotateY_three,
         }}
-        className=" fixed lg:w-[350px] lg:h-[350px] md:w-[300px] md:h-[300px] w-[250px] h-[250px] top-[75%] left-[45%] -translate-x-[50%] -translate-y-[50%] z-[20]"
+        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[75%] left-[45%] -translate-x-[50%] -translate-y-[50%] z-[20]"
       >
         <img src={src2} className=" w-full h-full object-cover" />
       </motion.div>
@@ -196,9 +220,9 @@ const Hero = () => {
           x: "-50%",
           y: "-50%",
           rotateX: rotateX_four,
-          rotateY: 20,
+          rotateY: rotateY_four,
         }}
-        className=" fixed lg:w-[350px] lg:h-[350px] md:w-[300px] md:h-[300px] w-[250px] h-[250px] top-[75%] left-[62.5%] -translate-x-[50%] -translate-y-[50%] z-[20]"
+        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[75%] left-[62.5%] -translate-x-[50%] -translate-y-[50%] z-[20]"
       >
         <img src={src4} className=" w-full h-full object-cover" />
       </motion.div>
