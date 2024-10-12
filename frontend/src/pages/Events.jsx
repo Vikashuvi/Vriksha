@@ -1,66 +1,107 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import eve1 from '../assets/brand1.jpg';
-import eve2 from '../assets/brand2.jpg';
-import eve3 from '../assets/brand3.jpg';
-import eve4 from '../assets/brand4.jpg';
+import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
+import eve1 from "../assets/brand1.jpg";
+import eve2 from "../assets/brand2.jpg";
+import eve3 from "../assets/brand3.jpg";
+import eve4 from "../assets/brand4.jpg";
+import eve5 from "../assets/brand1.jpg";
+import eve6 from "../assets/brand2.jpg";
+
+const EventsWrapper = styled.div`
+  height: 300vh;
+  position: relative;
+`;
+
+const EventsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: transparent;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  z-index: 20;
+`;
+
+const EventsText = styled.h1`
+  font-size: 20vw;
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+  white-space: nowrap;
+  transform: scaleY(1.2);
+  position: absolute;
+  z-index: 20;
+`;
+
+const ImageCardsContainer = styled.div`
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 100%; // Start off-screen to the right
+  transform: translateY(-50%);
+  transition: transform 0.1s ease-out;
+  z-index: 30;
+`;
+
+const ImageCard = styled.div`
+  width: 500px;
+  height: 400px;
+  margin-right: 20px;
+  background-image: url(${props => props.imageUrl});
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+`;
 
 const Events = () => {
-  const events = [
-    { id: 1, image: eve1 },
-    { id: 2, image: eve2 },
-    { id: 3, image: eve3 },
-    { id: 4, image: eve4 },
-    { id: 5, image: eve1 },
-    
-  ];
-
+  const imageUrls = [eve1, eve2, eve3, eve4, eve5, eve6];
   const containerRef = useRef(null);
-  const carouselRef = useRef(null);
-  const [carouselWidth, setCarouselWidth] = useState(0);
-  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
-    if (carouselRef.current && containerRef.current) {
-      const totalWidth = carouselRef.current.scrollWidth;
-      const containerWidth = containerRef.current.offsetWidth;
-      setCarouselWidth(totalWidth);
-    }
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const containerElement = containerRef.current;
+      if (containerElement) {
+        const eventsWrapper = document.getElementById("events-wrapper");
+        const wrapperRect = eventsWrapper.getBoundingClientRect();
+        const wrapperStart = wrapperRect.top + window.scrollY;
+        const wrapperEnd = wrapperStart + wrapperRect.height - window.innerHeight;
+        
+        const scrollProgress = (scrollPosition - wrapperStart) / (wrapperEnd - wrapperStart);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+        
+        const totalWidth = containerElement.scrollWidth - window.innerWidth;
+        const translateX = clampedProgress * totalWidth;
+        
+        containerElement.style.transform = `translateY(-50%) translateX(${-translateX}px)`;
+        
+        console.log('Scroll Progress:', clampedProgress);
+        console.log('Translate X:', translateX);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [`${window.innerWidth}px`, `-${carouselWidth - window.innerWidth}px`]
-  );
-
   return (
-    <section className="h-[1200vh]">
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <h2 className="text-7xl font-bold text-white absolute top-1/2.5 left-8 z-0 whitespace-nowrap">
-          EVENT GALLERY
-        </h2>
-        <div ref={containerRef} className="relative w-full h-[300px] overflow-hidden">
-          <motion.div
-            ref={carouselRef}
-            className="absolute top-0 left-0 flex gap-6 z-10"
-            style={{ x }}
-          >
-            {events.map((event) => (
-              <motion.div
-                key={event.id}
-                className="flex-shrink-0 w-[300px] h-[300px] bg-white rounded-lg shadow-md overflow-hidden"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <img src={event.image} alt={`Event ${event.id}`} className="w-full h-full object-cover" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );    
+    <EventsWrapper id="events-wrapper">
+      <EventsContainer>
+        <EventsText>Events</EventsText>
+        <ImageCardsContainer ref={containerRef}>
+          {imageUrls.map((url, index) => (
+            <ImageCard key={index} imageUrl={url} />
+          ))}
+        </ImageCardsContainer>
+      </EventsContainer>
+    </EventsWrapper>
+  );
 };
 
 export default Events;

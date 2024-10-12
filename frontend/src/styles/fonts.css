@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Nohemi';
+  src: url('../assets/Nohemi-Light-BF6438cc5702321.woff') format('woff2'),
+       url('../assets/Nohemi-Regular-BF6438cc579d934.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mazius Display';
+  src: url('/path/to/MaziusDisplay-Regular.woff2') format('woff2'),
+       url('/path/to/MaziusDisplay-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

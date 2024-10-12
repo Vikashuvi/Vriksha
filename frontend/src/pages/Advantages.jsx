@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+
 const advantagesData = [
   {
     title: "MODERN MICROCOSM",
@@ -117,7 +118,7 @@ const Advantages = () => {
     <section ref={sectionRef} className="bg-black min-h-screen flex items-center justify-center py-12 overflow-hidden relative">
       <div className="container mx-auto px-4">
         {/* Mobile heading */}
-        <h1 className="text-3xl font-bold text-white mb-8 text-center md:hidden">Advantages</h1>
+        <h1 className="text-4xl font-bold text-white mb-8 text-center md:hidden">Advantages</h1>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative max-w-4xl mx-auto">
           {advantagesData.map((advantage, index) => (
@@ -126,8 +127,8 @@ const Advantages = () => {
               ref={el => cardsRef.current[index] = el}
               className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-gray-200 border-opacity-20 rounded-lg p-4 md:p-6 sm:p-5 flex flex-col justify-between h-64 transition-transform duration-300 ease-out hover:bg-opacity-20"
             >
-              <h2 className="text-base sm:text-lg md:text-3xl font-bold mb-2 uppercase text-white px-3 py-2">{advantage.title}</h2>
-              <p className="text-xs md:text-xs sm:text-sm leading-tight text-gray-300 px-3 py-8">{advantage.description}</p>
+              <h2 className="text-3xl sm:text-lg md:text-3xl font-bold mb-2 uppercase text-white px-3 py-2">{advantage.title}</h2>
+              <p className="text-lg md:text-xs sm:text-sm leading-tight text-gray-300 px-3 py-8">{advantage.description}</p>
             </div>
           ))}
           

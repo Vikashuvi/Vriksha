@@ -1,6 +1,32 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import '../App.css'
+
+// Import font files
+import NohemiLightWoff2 from '../assets/Nohemi-Regular-BF6438cc579d934.woff';
+import NohemiLightWoff from '../assets/Nohemi-Regular-BF6438cc579d934.woff';
+import MaziusDisplayRegularWoff2 from '../assets/MAZIUSREVIEW20.09-Extraitalic.woff';
+import MaziusDisplayRegularWoff from '../assets/MAZIUSREVIEW20.09-Extraitalic.woff';
+
+// Create a style object with @font-face rules
+const fontStyles = `
+  @font-face {
+    font-family: 'Nohemi';
+    src: url(${NohemiLightWoff2}) format('woff2'),
+         url(${NohemiLightWoff}) format('woff');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Mazius Display';
+    src: url(${MaziusDisplayRegularWoff2}) format('woff2'),
+         url(${MaziusDisplayRegularWoff}) format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+`;
 
 let src1 =
   "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e1bcdc59b831ed881bc353_template-img-02-p-1600.webp";
@@ -168,80 +194,92 @@ const Hero = () => {
   );
 
   return (
-    <div className=" w-full h-[300vh]" ref={fullRef}>
-      {/* ------ Image 1 ------- */}
-      <motion.div
-        style={{
-          left: left_full_one,
-          top: top_full_one,
-          x: "-50%",
-          y: "-50%",
-          rotateX: rotateX_one,
-          rotateY: rotateY_one,
-        }}
-        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[55%] left-[35%]   z-[10]"
-      >
-        <img src={src1} className=" w-full h-full object-cover" />
-      </motion.div>
-      {/* ------- Image 2 ------ */}
-      <motion.div
-        style={{
-          left: left_full_two,
-          top: top_full_two,
-          x: "-50%",
-          y: "-50%",
-          rotateX: rotateX_two,
-          rotateY: rotateY_two,
-        }}
-        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[55%] left-[70%] -translate-x-[50%] -translate-y-[50%] z-[10]"
-      >
-        <img src={src3} className=" w-full h-full object-cover" />
-      </motion.div>
+    <>
+      {/* Inject the font styles */}
+      <style>{fontStyles}</style>
 
-      {/* --------Image 3 ----- */}
-      <motion.div
-        style={{
-          left: left_full_three,
-          top: top_full_three,
-          x: "-50%",
-          y: "-50%",
-          rotateX: rotateX_three,
-          rotateY: rotateY_three,
-        }}
-        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[75%] left-[45%] -translate-x-[50%] -translate-y-[50%] z-[20]"
-      >
-        <img src={src2} className=" w-full h-full object-cover" />
-      </motion.div>
-      {/* -------- Image 4 ----- */}
-      <motion.div
-        style={{
-          left: left_full_four,
-          top: top_full_four,
-          x: "-50%",
-          y: "-50%",
-          rotateX: rotateX_four,
-          rotateY: rotateY_four,
-        }}
-        className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[75%] left-[62.5%] -translate-x-[50%] -translate-y-[50%] z-[20]"
-      >
-        <img src={src4} className=" w-full h-full object-cover" />
-      </motion.div>
+      <div className=" w-full h-[300vh]" ref={fullRef}>
+        {/* ------ Image 1 ------- */}
+        <motion.div
+          style={{
+            left: left_full_one,
+            top: top_full_one,
+            x: "-50%",
+            y: "-50%",
+            rotateX: rotateX_one,
+            rotateY: rotateY_one,
+          }}
+          className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[55%] left-[35%]   z-[10]"
+        >
+          <img src={src1} className=" w-full h-full object-cover" />
+        </motion.div>
+        {/* ------- Image 2 ------ */}
+        <motion.div
+          style={{
+            left: left_full_two,
+            top: top_full_two,
+            x: "-50%",
+            y: "-50%",
+            rotateX: rotateX_two,
+            rotateY: rotateY_two,
+          }}
+          className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[55%] left-[70%] -translate-x-[50%] -translate-y-[50%] z-[10]"
+        >
+          <img src={src3} className=" w-full h-full object-cover" />
+        </motion.div>
 
-      {/* --- Text Behind */}
+        {/* --------Image 3 ----- */}
+        <motion.div
+          style={{
+            left: left_full_three,
+            top: top_full_three,
+            x: "-50%",
+            y: "-50%",
+            rotateX: rotateX_three,
+            rotateY: rotateY_three,
+          }}
+          className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[75%] left-[45%] -translate-x-[50%] -translate-y-[50%] z-[20]"
+        >
+          <img src={src2} className=" w-full h-full object-cover" />
+        </motion.div>
+        {/* -------- Image 4 ----- */}
+        <motion.div
+          style={{
+            left: left_full_four,
+            top: top_full_four,
+            x: "-50%",
+            y: "-50%",
+            rotateX: rotateX_four,
+            rotateY: rotateY_four,
+          }}
+          className=" fixed lg:w-[350px] lg:h-[300px] md:w-[275px] md:h-[275px] w-[200px] h-[200px] top-[75%] left-[62.5%] -translate-x-[50%] -translate-y-[50%] z-[20]"
+        >
+          <img src={src4} className=" w-full h-full object-cover" />
+        </motion.div>
 
-      <motion.h1
-        style={{
-          top: top_full_text,
-          scale: scale_full_text,
-          left: "50%",
-          x: "-50%",
-          y: "-50%",
-        }}
-        className=" lg:w-full w-[50%] font-poppins lg:text-[42px] text-[24px] text-[white] font-[600] fixed z-[5] text-center"
-      >
-        Vriksha Gives WINGS <br></br> To <br></br> Your Child’s Dream
-      </motion.h1>
-    </div>
+        {/* --- Text Behind */}
+
+        <motion.h1
+          style={{
+            top: top_full_text,
+            scale: scale_full_text,
+            left: "50%",
+            x: "-50%",
+            y: "-50%",
+            fontFamily: "'Nohemi', sans-serif",
+          }}
+          className="lg:w-full w-[50%] md:text-[38px] text-[24px] text-[white] font-[100] fixed z-[5] text-center uppercase"
+        >
+          Vriksha Gives WINGS <br /> To Your <br />{" "}
+          <span 
+            style={{ fontFamily: "'Mazius Display', serif" }}
+            className="text-[#ff516f] normal-case"
+          >
+            Child's Dream
+          </span>
+        </motion.h1>
+      </div>
+    </>
   );
 };
 
