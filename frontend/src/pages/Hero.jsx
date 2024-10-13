@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
-import img1 from '../assets/1.png'
-import img2 from '../assets/2.png'
-import img3 from '../assets/3.png'
-import img4 from '../assets/4.png'
-import '../App.css'
+import img1 from "../assets/1.png";
+import img2 from "../assets/2.png";
+import img3 from "../assets/3.png";
+import img4 from "../assets/4.png";
+import "../App.css";
 
 // Import font files
-import NohemiLightWoff2 from '../assets/Nohemi-Regular-BF6438cc579d934.woff';
-import NohemiLightWoff from '../assets/Nohemi-Regular-BF6438cc579d934.woff';
-import MaziusDisplayRegularWoff2 from '../assets/MAZIUSREVIEW20.09-Extraitalic.woff';
-import MaziusDisplayRegularWoff from '../assets/MAZIUSREVIEW20.09-Extraitalic.woff';
+import NohemiLightWoff2 from "../assets/Nohemi-Regular-BF6438cc579d934.woff";
+import NohemiLightWoff from "../assets/Nohemi-Regular-BF6438cc579d934.woff";
+import MaziusDisplayRegularWoff2 from "../assets/MAZIUSREVIEW20.09-Extraitalic.woff";
+import MaziusDisplayRegularWoff from "../assets/MAZIUSREVIEW20.09-Extraitalic.woff";
 
 // Create a style object with @font-face rules
 const fontStyles = `
@@ -32,10 +32,10 @@ const fontStyles = `
   }
 `;
 
-let src1 = img1;
-let src2 = img2;
-let src3 = img3;
-let src4 = img4;
+let src1 = img2;
+let src2 = img1;
+let src3 = img4;
+let src4 = img3;
 
 const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 920 });
@@ -111,7 +111,7 @@ const Hero = () => {
   const rotateY_two = useTransform(
     fullRef_useScroll?.scrollYProgress,
     [0, 0.1, 0.33, 1],
-    [4, 20, 38, 38]
+    [4, 25, 45, 45]
   );
 
   //------ Image 3 -------------------
@@ -172,6 +172,12 @@ const Hero = () => {
     [-2, -5, -10, -10]
   );
 
+  const rotateY_four = useTransform(
+    fullRef_useScroll?.scrollYProgress,
+    [0, 0.33, 0.66, 1],
+    [4, 25, 40, 40]
+  );
+
   //----------------------------------
 
   const top_full_text = useTransform(
@@ -186,11 +192,7 @@ const Hero = () => {
     [0.7, 1, 1.5, 1.5, 1.5]
   );
 
-  const rotateY_four = useTransform(
-    fullRef_useScroll?.scrollYProgress,
-    [0, 0.33, 0.66, 1],
-    [4, 20, 38, 38]
-  );
+
 
   return (
     <>
@@ -267,10 +269,10 @@ const Hero = () => {
             y: "-50%",
             fontFamily: "'Nohemi', sans-serif",
           }}
-          className="lg:w-full w-[50%] md:text-[38px] text-[24px] text-[white] font-[100] fixed z-[5] text-center uppercase"
+          className="lg:w-full w-[50%] md:text-[38px] text-[24px] text-[white] font-[600] fixed z-[5] text-center capitalize  bg-whitelight text-transparent bg-clip-text "
         >
           Vriksha Gives WINGS <br /> To Your <br />{" "}
-          <span 
+          <span
             style={{ fontFamily: "'Mazius Display', serif" }}
             className="text-[#ff516f] normal-case"
           >

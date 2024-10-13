@@ -4,7 +4,7 @@ import Vision from "./Vision";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import Milestones from "./Milestones";
-import logo from '../assets/logo.png';  
+import logo from '../assets/logo.gif';  
 import Milestones_Mobile from "./Milestones_Mobile";
 
 const HeroAndVisionSection = () => {

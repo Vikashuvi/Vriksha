@@ -19,17 +19,17 @@ const Milestone_actual_animation = () => {
 
   const image_one_rotate = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.1, 0.2],
+    [0, 0.1, 0.24],
     [-90, 0, 90]
   );
   const image_one_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.2],
+    [0, 0.24],
     ["105%", "-5%"]
   );
   const scale_one_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0, 0.08, 0.12, 0.2],
+    [0, 0.08, 0.12, 0.24],
     [0.8, 1, 1, 0.8]
   );
 
@@ -37,17 +37,17 @@ const Milestone_actual_animation = () => {
 
   const image_two_rotate = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.2, 0.3, 0.4],
+    [0.22, 0.3, 0.44],
     [-90, 0, 90]
   );
   const image_two_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.2, 0.4],
+    [0.22, 0.44],
     ["105%", "-5%"]
   );
   const scale_two_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.2, 0.28, 0.32, 0.4],
+    [0.22, 0.28, 0.32, 0.44],
     [0.8, 1, 1, 0.8]
   );
 
@@ -55,17 +55,17 @@ const Milestone_actual_animation = () => {
 
   const image_three_rotate = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.4, 0.5, 0.6],
+    [0.42, 0.5, 0.64],
     [-90, 0, 90]
   );
   const image_three_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.4, 0.6],
+    [0.42, 0.64],
     ["105%", "-5%"]
   );
   const scale_three_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.4, 0.48, 0.52, 0.6],
+    [0.42, 0.48, 0.52, 0.64],
     [0.8, 1, 1, 0.8]
   );
 
@@ -73,17 +73,17 @@ const Milestone_actual_animation = () => {
 
   const image_four_rotate = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.6, 0.7, 0.8],
+    [0.64, 0.7, 0.84],
     [-90, 0, 90]
   );
   const image_four_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.6, 0.8],
+    [0.62, 0.84],
     ["105%", "-5%"]
   );
   const scale_four_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.6, 0.68, 0.72, 0.8],
+    [0.62, 0.68, 0.72, 0.84],
     [0.8, 1, 1, 0.8]
   );
 
@@ -91,7 +91,7 @@ const Milestone_actual_animation = () => {
 
   const image_five_rotate = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.8, 0.9, 1],
+    [0.82, 0.9, 1],
     [-90, 0, 90]
   );
   const image_five_top = useTransform(
@@ -101,7 +101,7 @@ const Milestone_actual_animation = () => {
   );
   const scale_five_top = useTransform(
     fullRef_useScroll?.scrollYProgress,
-    [0.8, 0.88, 0.92, 1],
+    [0.82, 0.88, 0.92, 1],
     [0.8, 1, 1, 0.8]
   );
 
@@ -149,7 +149,7 @@ const Milestone_actual_animation = () => {
             rotateX: image_one_rotate,
             scale: scale_one_top,
           }}
-          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+          className=" w-[550px] h-[400px] rounded-[30px]  fixed z-[20] overflow-hidden "
         >
           <img src={src1} className=" w-full h-full object-cover " />
         </motion.div>
@@ -163,7 +163,7 @@ const Milestone_actual_animation = () => {
             rotateX: image_two_rotate,
             scale: scale_two_top,
           }}
-          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+          className=" w-[550px] h-[400px] rounded-[30px]  fixed z-[20] overflow-hidden "
         >
           <img src={src2} className=" w-full h-full object-cover " />
         </motion.div>
@@ -177,7 +177,7 @@ const Milestone_actual_animation = () => {
             rotateX: image_three_rotate,
             scale: scale_three_top,
           }}
-          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+          className=" w-[550px] h-[400px] rounded-[30px]  fixed z-[20] overflow-hidden "
         >
           <img src={src1} className=" w-full h-full object-cover " />
         </motion.div>
@@ -191,7 +191,7 @@ const Milestone_actual_animation = () => {
             rotateX: image_four_rotate,
             scale: scale_four_top,
           }}
-          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+          className=" w-[550px] h-[400px] rounded-[30px]  fixed z-[20] overflow-hidden "
         >
           <img src={src2} className=" w-full h-full object-cover " />
         </motion.div>
@@ -205,7 +205,7 @@ const Milestone_actual_animation = () => {
             rotateX: image_five_rotate,
             scale: scale_five_top,
           }}
-          className=" w-[550px] h-[300px] rounded-[30px]  fixed z-[20] overflow-hidden "
+          className=" w-[550px] h-[400px] rounded-[30px]  fixed z-[20] overflow-hidden "
         >
           <img src={src1} className=" w-full h-full object-cover " />
         </motion.div>

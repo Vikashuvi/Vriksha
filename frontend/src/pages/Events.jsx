@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import eve1 from "../assets/brand1.jpg";
-import eve2 from "../assets/brand2.jpg";
-import eve3 from "../assets/brand3.jpg";
-import eve4 from "../assets/brand4.jpg";
-import eve5 from "../assets/brand1.jpg";
-import eve6 from "../assets/brand2.jpg";
 
-const CardWidth = 610; // Width of each card
+import event1 from "../assets/events/Event1.jpg";
+import event2 from "../assets/events/Event2.jpg";
+import event3 from "../assets/events/Event3.jpg";
+import event4 from "../assets/events/Event4.jpg";
+
+const CardWidth = 800; // Width of each card
 const CardMargin = 20; // Margin between cards
 
 const EventsWrapper = styled.div`
@@ -54,7 +53,7 @@ const ImageCard = styled.div`
   width: 500px;
   height: 400px;
   margin-right: 20px;
-  background-image: url(${props => props.imageUrl});
+  background-image: url(${(props) => props.imageUrl});
   background-size: cover;
   background-position: center;
   border-radius: 10px;
@@ -63,7 +62,29 @@ const ImageCard = styled.div`
 `;
 
 const Events = () => {
-  const imageUrls = [eve1, eve2, eve3, eve4, eve5, eve6];
+  const imageUrls_with_content = [
+    {
+      image: event1,
+      title: "15th State level chess tournament",
+      description: "9TH DEC, 2019",
+    },
+    {
+      image: event2,
+      title: "Utsav 2019",
+      description: "9TH DEC, 2019",
+    },
+    {
+      image: event3,
+      title: "Vriksha Junior Sport Event",
+      description: "9TH DEC, 2019",
+    },
+    {
+      image: event4,
+      title: "Vriksha Junior Sport Meet",
+      description: "9TH DEC, 2019",
+    },
+  ];
+
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -74,30 +95,45 @@ const Events = () => {
         const eventsWrapper = document.getElementById("events-wrapper");
         const wrapperRect = eventsWrapper.getBoundingClientRect();
         const wrapperStart = wrapperRect.top + window.scrollY;
-        const wrapperEnd = wrapperStart + wrapperRect.height - window.innerHeight;
-        
-        const scrollProgress = (scrollPosition - wrapperStart) / (wrapperEnd - wrapperStart);
+        const wrapperEnd =
+          wrapperStart + wrapperRect.height - window.innerHeight;
+
+        const scrollProgress =
+          (scrollPosition - wrapperStart) / (wrapperEnd - wrapperStart);
         const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
-        
-        const totalCardsWidth = imageUrls.length * (CardWidth + CardMargin) - CardMargin;
-        const scrollDistance = totalCardsWidth - window.innerWidth + CardWidth;
+
+        const totalCardsWidth =
+          imageUrls_with_content.length * (CardWidth + CardMargin) - CardMargin;
+        const containerWidth = window.innerWidth;
+        const scrollDistance = totalCardsWidth - containerWidth;
         const translateX = -clampedProgress * scrollDistance;
-        
+
         containerElement.style.transform = `translateY(-50%) translateX(${translateX}px)`;
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [imageUrls.length]);
+  }, [imageUrls_with_content.length]);
 
   return (
     <EventsWrapper id="events-wrapper">
       <EventsContainer>
         <EventsText>Events</EventsText>
         <ImageCardsContainer ref={containerRef}>
-          {imageUrls.map((url, index) => (
-            <ImageCard key={index} imageUrl={url} />
+          {imageUrls_with_content.map((item, index) => (
+            <ImageCard key={index} imageUrl={item?.image}>
+              <div className=" w-full h-full flex flex-col justify-end">
+                <div className=" w-full h-[25%] bg-black bg-opacity-60 ps-4 pe-4 pt-1 flex flex-col justify-start gap-[0.5rem] ">
+                  <h1 className=" text-[24px] text-[white] font-bold  ">
+                    {item?.title}
+                  </h1>
+                  <p className=" text-[14px] font-[500] text-[white]">
+                    {item?.description}
+                  </p>
+                </div>
+              </div>
+            </ImageCard>
           ))}
         </ImageCardsContainer>
       </EventsContainer>

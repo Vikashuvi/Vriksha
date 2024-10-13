@@ -281,84 +281,89 @@ const Testimonial = () => {
 
   return (
     <>
-      <div className="w-full h-screen relative overflow-hidden sm:block hidden">
-        {/* ---------------- */}
+      <div className=" w-full h-[120vh] overflow-hidden sm:block hidden">
+        <h1 className="text-[12vw] text-center font-black text-white uppercase tracking-[-0.05em] leading-[0.8] whitespace-nowrap scale-y-[1.2] mb-[2rem]">
+          Testimonals
+        </h1>
+        <div className="w-full h-screen relative overflow-hidden sm:block hidden">
+          {/* ---------------- */}
 
-        {/* First */}
-        <Separtate_testimonal_Component
-          whole_control={whole_one_control}
-          text_control={text_one_control}
-          image_control={image_one_control}
-          whole_initial={{ x: "-50%", y: "-50%", left: one_left + "%" }}
-          text_initial={{ opacity: 0 }}
-          image_initial={{ scale: 0.75 }}
-          content={content_testimonal[0]}
-        />
+          {/* First */}
+          <Separtate_testimonal_Component
+            whole_control={whole_one_control}
+            text_control={text_one_control}
+            image_control={image_one_control}
+            whole_initial={{ x: "-50%", y: "-50%", left: one_left + "%" }}
+            text_initial={{ opacity: 0 }}
+            image_initial={{ scale: 0.75 }}
+            content={content_testimonal[0]}
+          />
 
-        {/* Second */}
-        <Separtate_testimonal_Component
-          whole_control={whole_two_control}
-          text_control={text_two_control}
-          image_control={image_two_control}
-          whole_initial={{ x: "-50%", y: "-50%", left: two_left + "%" }}
-          text_initial={{}}
-          image_initial={{}}
-          content={content_testimonal[1]}
-        />
+          {/* Second */}
+          <Separtate_testimonal_Component
+            whole_control={whole_two_control}
+            text_control={text_two_control}
+            image_control={image_two_control}
+            whole_initial={{ x: "-50%", y: "-50%", left: two_left + "%" }}
+            text_initial={{}}
+            image_initial={{}}
+            content={content_testimonal[1]}
+          />
 
-        {/* Third */}
-        <Separtate_testimonal_Component
-          whole_control={whole_three_control}
-          text_control={text_three_control}
-          image_control={image_three_control}
-          whole_initial={{
-            x: "-50%",
-            y: "-50%",
+          {/* Third */}
+          <Separtate_testimonal_Component
+            whole_control={whole_three_control}
+            text_control={text_three_control}
+            image_control={image_three_control}
+            whole_initial={{
+              x: "-50%",
+              y: "-50%",
 
-            left: three_left + "%",
-          }}
-          text_initial={{ opacity: 0 }}
-          image_initial={{ scale: 0.75 }}
-          content={content_testimonal[2]}
-        />
-
-        {/* Fourth  */}
-        <Separtate_testimonal_Component
-          whole_control={whole_four_control}
-          text_control={text_four_control}
-          image_control={image_four_control}
-          whole_initial={{
-            x: "-50%",
-            y: "-50%",
-            left: four_left + "%",
-          }}
-          text_initial={{ opacity: 0 }}
-          image_initial={{ scale: 0.75 }}
-          content={content_testimonal[3]}
-        />
-
-        {/* -------------- Button Section --------- */}
-        <div className="w-fit h-fit absolute bottom-[2rem] right-[2rem] flex flex-row justify-center gap-[1.5rem]">
-          {/* Button 1 */}
-          <button
-            onClick={() => {
-              left_scroll_button_click();
+              left: three_left + "%",
             }}
-            className=" w-[60px] h-[60px] rounded-[50%] bg-[#3d3d3d] flex flex-row justify-center items-center hover:bg-[#ff516f] hover:scale-110 duration-300 "
-          >
-            <MdKeyboardDoubleArrowLeft size={24} color="white" />
-          </button>
-          {/* Button 2 */}
-          <button
-            onClick={() => {
-              right_scroll_button_click();
+            text_initial={{ opacity: 0 }}
+            image_initial={{ scale: 0.75 }}
+            content={content_testimonal[2]}
+          />
+
+          {/* Fourth  */}
+          <Separtate_testimonal_Component
+            whole_control={whole_four_control}
+            text_control={text_four_control}
+            image_control={image_four_control}
+            whole_initial={{
+              x: "-50%",
+              y: "-50%",
+              left: four_left + "%",
             }}
-            className=" w-[60px] h-[60px] rounded-[50%] rotate-180 bg-[#3d3d3d] flex flex-row justify-center items-center hover:bg-[#ff516f] hover:scale-110 duration-300 "
-          >
-            <MdKeyboardDoubleArrowLeft size={24} color="white" />
-          </button>
+            text_initial={{ opacity: 0 }}
+            image_initial={{ scale: 0.75 }}
+            content={content_testimonal[3]}
+          />
+
+          {/* -------------- Button Section --------- */}
+          <div className="w-fit h-fit absolute bottom-[2rem] right-[2rem] flex flex-row justify-center gap-[1.5rem]">
+            {/* Button 1 */}
+            <button
+              onClick={() => {
+                left_scroll_button_click();
+              }}
+              className=" w-[60px] h-[60px] rounded-[50%] bg-[#3d3d3d] flex flex-row justify-center items-center hover:bg-[#ff516f] hover:scale-110 duration-300 "
+            >
+              <MdKeyboardDoubleArrowLeft size={24} color="white" />
+            </button>
+            {/* Button 2 */}
+            <button
+              onClick={() => {
+                right_scroll_button_click();
+              }}
+              className=" w-[60px] h-[60px] rounded-[50%] rotate-180 bg-[#3d3d3d] flex flex-row justify-center items-center hover:bg-[#ff516f] hover:scale-110 duration-300 "
+            >
+              <MdKeyboardDoubleArrowLeft size={24} color="white" />
+            </button>
+          </div>
+          {/* ---------------- */}
         </div>
-        {/* ---------------- */}
       </div>
     </>
   );

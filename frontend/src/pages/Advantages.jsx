@@ -115,7 +115,7 @@ const Advantages = () => {
   }, [scrollProgress, isMobile]);
 
   return (
-    <section ref={sectionRef} className="bg-black min-h-screen flex items-center justify-center py-12 overflow-hidden relative">
+    <section ref={sectionRef} className="bg-black min-h-screen flex items-center justify-center py-12 overflow-hidden relative mt-12">
       <div className="container mx-auto px-4">
         {/* Mobile heading */}
         <h1 className="text-4xl font-bold text-white mb-8 text-center md:hidden">Advantages</h1>
