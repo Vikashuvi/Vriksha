@@ -5,6 +5,7 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import Milestones from "./Milestones";
 
+
 import Milestones_Mobile from "./Milestones_Mobile";
 
 let src1 = "https://www.vrikshaschool.com/images/head-logo.png";

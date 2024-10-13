@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import Std1 from '../assets/brand1.jpg';
-import Std2 from '../assets/brand2.jpg';
-import Std3 from '../assets/brand3.jpg';
-import Std4 from '../assets/brand4.jpg';
+import Std1 from '../assets/1.png';
+import Std2 from '../assets/2.png';
+import Std3 from '../assets/3.png';
+import Std4 from '../assets/4.png';
 
 const CTAContainer = styled.section`
   display: flex;

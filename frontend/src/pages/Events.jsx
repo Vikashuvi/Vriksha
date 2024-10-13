@@ -7,6 +7,9 @@ import eve4 from "../assets/brand4.jpg";
 import eve5 from "../assets/brand1.jpg";
 import eve6 from "../assets/brand2.jpg";
 
+const CardWidth = 610; // Width of each card
+const CardMargin = 20; // Margin between cards
+
 const EventsWrapper = styled.div`
   height: 300vh;
   position: relative;
@@ -76,19 +79,17 @@ const Events = () => {
         const scrollProgress = (scrollPosition - wrapperStart) / (wrapperEnd - wrapperStart);
         const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
         
-        const totalWidth = containerElement.scrollWidth - window.innerWidth;
-        const translateX = clampedProgress * totalWidth;
+        const totalCardsWidth = imageUrls.length * (CardWidth + CardMargin) - CardMargin;
+        const scrollDistance = totalCardsWidth - window.innerWidth + CardWidth;
+        const translateX = -clampedProgress * scrollDistance;
         
-        containerElement.style.transform = `translateY(-50%) translateX(${-translateX}px)`;
-        
-        console.log('Scroll Progress:', clampedProgress);
-        console.log('Translate X:', translateX);
+        containerElement.style.transform = `translateY(-50%) translateX(${translateX}px)`;
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [imageUrls.length]);
 
   return (
     <EventsWrapper id="events-wrapper">

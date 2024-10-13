@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
+import img1 from '../assets/1.png'
+import img2 from '../assets/2.png'
+import img3 from '../assets/3.png'
+import img4 from '../assets/4.png'
 import '../App.css'
 
 // Import font files
@@ -28,15 +32,10 @@ const fontStyles = `
   }
 `;
 
-let src1 =
-  "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e1bcdc59b831ed881bc353_template-img-02-p-1600.webp";
-let src2 =
-  "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e1bcdc473966a97c3840cb_template-img-09.webp";
-let src3 =
-  "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e1bcdc07e554b02f16726b_template-img-03-p-1600.webp";
-
-let src4 =
-  "https://cdn.prod.website-files.com/66d39c6cae70a65d79022708/66e1bcdc76d1db31e6546969_template-img-06-p-500.webp";
+let src1 = img1;
+let src2 = img2;
+let src3 = img3;
+let src4 = img4;
 
 const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 920 });
