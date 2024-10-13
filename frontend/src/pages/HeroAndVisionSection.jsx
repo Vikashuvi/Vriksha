@@ -4,17 +4,12 @@ import Vision from "./Vision";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 import Milestones from "./Milestones";
-
-
+import logo from '../assets/logo.png';  
 import Milestones_Mobile from "./Milestones_Mobile";
-
-let src1 = "https://www.vrikshaschool.com/images/head-logo.png";
 
 const HeroAndVisionSection = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const full_ref = useRef();
-
-  //---------------------------------------------------------
 
   const full_ref_useScroll = useScroll({
     target: full_ref,
@@ -33,8 +28,14 @@ const HeroAndVisionSection = () => {
     [0.25, 1, 1, 2, 2, 1, 1, 0.5]
   );
 
+  const logo_opacity = useTransform(
+    full_ref_useScroll?.scrollYProgress,
+    [0, 0.3, 0.4, 0.5, 0.6, 0.7],
+    [1, 1, 0.5, 0.3, 0.5, 1]
+  );
+
   return (
-    <div className=" w-full h-fit " ref={full_ref}>
+    <div className="w-full h-fit" ref={full_ref}>
       <Hero />
       <Vision />
       {isMobile ? <Milestones_Mobile /> : <Milestones />}
@@ -43,16 +44,15 @@ const HeroAndVisionSection = () => {
         style={{
           top: logo_top,
           scale: logo_scale,
+          opacity: logo_opacity,
           left: "50%",
           x: "-50%",
           y: "-50%",
         }}
-        className=" fixed top-[50%] left-[50%]  xl:w-[40vw] xl:h-[40vw] lg:w-[50vw] lg:h-[50vw] h-[60vw] w-[60vw] rounded-[50%] bg-gray-50 bg-opacity-35 -translate-x-[50%] -translate-y-[50%] z-[0]"
+        className="fixed top-[50%] left-[50%] xl:w-[40vw] xl:h-[40vw] lg:w-[50vw] lg:h-[50vw] h-[60vw] w-[60vw] -translate-x-[50%] -translate-y-[50%] z-[0]"
       >
-        <div className=" relative  w-full h-full flex flex-row  justify-center items-center">
-          <div className=" absolute w-[75%] h-[75%]  top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] ">
-            <img src={src1} className=" w-full h-full z-[2]" />
-          </div>
+        <div className="relative w-full h-full flex flex-row justify-center items-center">
+          <img src={logo} className="w-[75%] h-[75%] z-[2]" alt="Logo" />
         </div>
       </motion.div>
     </div>
